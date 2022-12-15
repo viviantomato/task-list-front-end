@@ -8,7 +8,7 @@ Lifting up state will set us up to connect our front end to our back end API.
 
 We will update and implement the following features:
 1. Update the toggle `complete` feature of each `Task` to update the state of the task data stored in `App`.
-1. Add a feature to delete a `task` from the task data stored and rendered by the `App`.
+2. Add a feature to delete a `task` from the task data stored and rendered by the `App`.
 
 
 ## Lifting Up State
