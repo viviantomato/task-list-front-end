@@ -24,16 +24,20 @@ Read through the code in `App.js`, `TaskList.js` and `Task.js` and their style s
 2. The `Task` component uses destructuring to read in the props `const Task = ({ id, title, isComplete }) => {...`
 
    - How would the code change if `{id, title, isComplete}` were replaced with `props`?
+     - A: we would have to separate all of the elements of the props under Task. ex. props.id
 
-   - Consider making this change and the subsequent necessary changes through the rest of the component to deepen your understanding of the code.
+   - Consider making this change and the subsequent necessary changes through the rest of the component to deepen your understanding of the code
+     - x
 
    -> const Task = (props) => {
    const [complete, setComplete] - useState(props.isComplete);
    }
 
 3. How is the ~~strikethrough~~ style applied when the task title is clicked?
+    - A: there is a button with a toggle on line 18 of Task.js that turns a CSS text decoration strikethrough on and off
 
    - Consider updating the appropriate rule sets to change the text or background color when a task is marked complete.
+   - x
 
    -> Task.js
    When the task is complete, apply the strikethrough style.
