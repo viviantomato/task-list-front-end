@@ -35,6 +35,13 @@ const App = () => {
     setTaskList(tasks);
   };
 
+  // using filter
+  const deleteTask = (taskId) => {
+    console.log('delete Func');
+    const tasks = taskList.filter((task) => task.id !== taskId);
+    setTaskList(tasks);
+  };
+
   return (
     <div className="App">
       <header className="App-header">
@@ -42,7 +49,11 @@ const App = () => {
       </header>
       <main>
         <div>
-          <TaskList tasks={taskList} markComplete={markComplete} />
+          <TaskList
+            tasks={taskList}
+            markComplete={markComplete}
+            deleteTask={deleteTask}
+          />
         </div>
       </main>
     </div>
