@@ -11,7 +11,7 @@ const INITIAL_TASKS = [
   {
     id: 2,
     title: 'Cook Pasta',
-    isComplete: true,
+    isComplete: false,
   },
 ];
 
@@ -21,17 +21,18 @@ const App = () => {
   });
 
   // ****** DEBUG HERE *****
-  const [complete, setComplete] = useState(initialCopy);
+  const [taskList, setTaskList] = useState(initialCopy);
 
   // loops over initialCopy to find the item with the ID that we're looking to mark as complete
   // marks that item complete - returns list of all items with the one updated item
-  const markComplete = (taskID) => {
-    const tasks = initialCopy.map((task) => {
-      if (task.id === taskID) {
-        return taskID;
+  const markComplete = (taskToUpdate) => {
+    const tasks = taskList.map((task) => {
+      if (task.id === taskToUpdate.id) {
+        return taskToUpdate;
       }
+      return task;
     });
-    setComplete(tasks);
+    setTaskList(tasks);
   };
 
   return (
@@ -41,7 +42,7 @@ const App = () => {
       </header>
       <main>
         <div>
-          {<TaskList tasks={INITIAL_TASKS} markComplete={markComplete} />}
+          <TaskList tasks={taskList} markComplete={markComplete} />
         </div>
       </main>
     </div>
