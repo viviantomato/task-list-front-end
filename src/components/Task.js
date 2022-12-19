@@ -12,8 +12,8 @@ const Task = (props) => {
   const buttonClass = isComplete ? 'tasks__item__toggle--completed' : '';
 
   const toggleComplete = () => {
-    markComplete({ id: id, title: title, isComplete: !isComplete });
-    console.log(id);
+    markComplete({ id: id, title: title, isComplete: isComplete });
+    console.log(isComplete);
   };
 
   return (

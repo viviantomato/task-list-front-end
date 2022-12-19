@@ -49,17 +49,11 @@ const App = () => {
   const markComplete = (taskObj) => {
     const newTasksList = [];
 
-    // const taskObjCopy = res.data.map((task) => {
-    //   return {
-    //     id: task.id,
-    //     title: task.title,
-    //     isComplete: task.isComplete,
-    //   };
-    // });
-
     // debug here!!
 
-    if (taskObj.isComplete === true) {
+    if (taskObj.isComplete === false) {
+      console.log(taskObj.isComplete);
+      console.log('toggling to true');
       axios
         .patch(`${URL}/${taskObj.id}/mark_complete`) // the "/" represents the / found in the endpoint
         .then((res) => {
@@ -80,6 +74,7 @@ const App = () => {
           console.log(error);
         });
     } else {
+      console.log('toggling to false');
       axios
         .patch(`${URL}/${taskObj.id}/mark_incomplete`) // the "/" represents the / found in the endpoint
         .then((res) => {
@@ -89,7 +84,7 @@ const App = () => {
             } else {
               const newTask = {
                 ...task, //...bike is a shorthand for going through each element
-                isComplete: taskObj.isComplete,
+                isComplete: !taskObj.isComplete,
               };
               newTasksList.push(newTask);
             }
@@ -138,3 +133,11 @@ const App = () => {
 };
 
 export default App;
+
+// const taskObjCopy = res.data.map((task) => {
+//   return {
+//     id: task.id,
+//     title: task.title,
+//     isComplete: task.isComplete,
+//   };
+// });
