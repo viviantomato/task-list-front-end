@@ -43,25 +43,6 @@ const App = () => {
 
   useEffect(fetchAllTasks, []);
 
-  // useEffect(() => {
-  //   axios
-  //     .get(URL)
-  //     .then((res) => {
-  //       //making a copy of the data to display to DOM
-  //       const tasksAPICopy = res.data.map((task) => {
-  //         return {
-  //           id: task.id,
-  //           title: task.title,
-  //           isComplete: task.is_complete,
-  //         };
-  //       });
-  //       setTaskList(tasksAPICopy);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // }, []);
-
   const markComplete = (taskObj) => {
     const newTasksList = [];
 
