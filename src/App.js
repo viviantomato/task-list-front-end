@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import TaskList from './components/TaskList.js';
 import './App.css';
 import axios from 'axios';
+import NewTaskForm from './components/NewTaskForm.js';
 
 // const INITIAL_TASKS = [
 //   {
@@ -20,14 +21,8 @@ const App = () => {
   const [taskList, setTaskList] = useState([]);
 
   const URL = 'http://localhost:5000/tasks';
-  // const initialCopy = INITIAL_TASKS.map((task) => {
-  //   return { ...task };
-  // });
 
-  // loops over initialCopy to find the item with the ID that we're looking to mark as complete
-  // marks that item complete - returns list of all items with the one updated item
-
-  useEffect(() => {
+  const fetchAllTasks = () => {
     axios
       .get(URL)
       .then((res) => {
@@ -44,12 +39,31 @@ const App = () => {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  };
+
+  useEffect(fetchAllTasks, []);
+
+  // useEffect(() => {
+  //   axios
+  //     .get(URL)
+  //     .then((res) => {
+  //       //making a copy of the data to display to DOM
+  //       const tasksAPICopy = res.data.map((task) => {
+  //         return {
+  //           id: task.id,
+  //           title: task.title,
+  //           isComplete: task.is_complete,
+  //         };
+  //       });
+  //       setTaskList(tasksAPICopy);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // }, []);
 
   const markComplete = (taskObj) => {
     const newTasksList = [];
-
-    // debug here!!
 
     if (taskObj.isComplete === false) {
       console.log(taskObj.isComplete);
@@ -108,10 +122,36 @@ const App = () => {
   // };
 
   // using filter
+
   const deleteTask = (taskId) => {
-    console.log('delete Func');
-    const tasks = taskList.filter((task) => task.id !== taskId);
-    setTaskList(tasks);
+    axios
+      .delete(`${URL}/${taskId}`)
+      .then(() => {
+        const newTaskList = [];
+        for (const task of taskList) {
+          if (task.id !== taskId) {
+            newTaskList.push(task);
+          }
+        }
+        setTaskList(newTaskList);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const addTask = (newTaskInfo) => {
+    //use axios.post request here
+    //handling .then to update frontend, update state variable with setBikesList()
+    axios
+      .post(URL, newTaskInfo)
+      .then((response) => {
+        // console.log(response);
+        fetchAllTasks();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
@@ -126,6 +166,7 @@ const App = () => {
             markComplete={markComplete}
             deleteTask={deleteTask}
           />
+          <NewTaskForm addTaskCallbackFunc={addTask} />
         </div>
       </main>
     </div>
